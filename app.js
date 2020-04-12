@@ -51,11 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ]
 
-
+    cardArr.sort(() => 0.5 -Math.random())
 
     const grid = document.querySelector('.grid')
+    const displayResult = document.querySelector('#result')
     var cardChosenArr = []
     var cardChosenId = []
+    var cardsWon = []
 
     // Creating a game board
     function createGameBoard(){
@@ -76,6 +78,29 @@ document.addEventListener('DOMContentLoaded', () => {
         var cards = document.querySelectorAll('img')
         const firstId = cardChosenId[0]
         const secondId = cardChosenId[1]
+        if (cardChosenArr[0] === cardChosenArr[1]){
+            
+            cards[firstId].setAttribute('src','images/white.png')
+            
+            cards[secondId].setAttribute('src','images/white.png')
+            
+            cardsWon.push(cardChosenArr)
+            
+            
+        }
+        else{
+            cards[firstId].setAttribute('src','images/blank.png')
+            cards[secondId].setAttribute('src','images/blank.png')
+            
+        }
+        cardChosenArr = []
+        cardChosenId = []
+        displayResult.textContent = cardsWon.length
+        if(cardsWon.length === (cardArr.length)/2){
+                document.getElementsByTagName('h3')[0].textContent = 'Congratulations'
+                alert('Game Over, You won! Sharp Memory!')
+
+        }
 
     }
 
